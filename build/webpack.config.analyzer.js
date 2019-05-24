@@ -5,10 +5,11 @@ const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const { resolve } = require('path')
-const devMode = process.env.NODE_ENV !== 'production'
+const devMode = process.env.NODE_ENV !== 'production';
 const BaseConfig = require('./webpack.config.base')
 const merge = require('webpack-merge')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const BundleAnalyzer = require('webpack-bundle-analyzer')
 
 const smp = new SpeedMeasurePlugin()
 
@@ -117,7 +118,8 @@ module.exports = smp.wrap(
             : 'asset/css/[id].[hash].css'
         }),
         new webpack.NamedModulesPlugin(),
-        new webpack.HashedModuleIdsPlugin()
+        new webpack.HashedModuleIdsPlugin(),
+        new BundleAnalyzer.BundleAnalyzerPlugin()
       ]
     },
     BaseConfig
