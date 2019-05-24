@@ -6,28 +6,30 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const merge = require('webpack-merge')
 const devMode = process.env.NODE_ENV !== 'production'
 
-const venderPackage = [
-  'vue',
-  'vuex',
-  'vue-router'
-  // 'react',
-  // 'react-dom',
-  // 'redux',
-  // 'redux-thunk',
-  // 'react-redux',
-  // 'react-router-dom',
-  // 'react-router-redux',
-  // 'history',
-  // 'prop-types',
-  // 'react-loadable'
-]
+// NOTE: 应用了splitChunks, 不再需要设置vender
+
+// const venderPackage = [
+//   'vue',
+//   'vuex',
+//   'vue-router'
+// 'react',
+// 'react-dom',
+// 'redux',
+// 'redux-thunk',
+// 'react-redux',
+// 'react-router-dom',
+// 'react-router-redux',
+// 'history',
+// 'prop-types',
+// 'react-loadable'
+// ]
 
 module.exports = merge(
   {
     mode: devMode ? 'development' : 'production',
     entry: {
-      app: './src',
-      vendor: venderPackage
+      app: './src'
+      // vendor: venderPackage
     },
     output: {
       path: resolve(__dirname, '../dist'),
