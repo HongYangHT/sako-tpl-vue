@@ -40,14 +40,14 @@ module.exports = smp.wrap(
               priority: 2,
               minChunks: 3
             },
-            reactBase: {
-              name: 'reactBase',
-              test: module => {
-                return /react|redux|prop-types/.test(module.context)
-              },
-              chunks: 'initial',
-              priority: 10
-            },
+            // reactBase: {
+            //   name: 'reactBase',
+            //   test: module => {
+            //     return /react|redux|prop-types/.test(module.context)
+            //   },
+            //   chunks: 'initial',
+            //   priority: 10
+            // },
             vueBase: {
               name: 'vueBase',
               test: module => {

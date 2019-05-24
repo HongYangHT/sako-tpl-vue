@@ -65,10 +65,10 @@ module.exports = merge(
         moment: 'moment',
         lodash: 'lodash',
         vuex: 'vuex',
-        'vue-router': 'vue-router',
-        react: 'react',
-        'react-router': 'react-router',
-        redux: 'redux'
+        'vue-router': 'vue-router'
+        // react: 'react',
+        // 'react-router': 'react-router',
+        // redux: 'redux'
       }
     },
     plugins: [

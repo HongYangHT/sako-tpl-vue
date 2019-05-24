@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const { resolve } = require('path')
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV !== 'production'
 const BaseConfig = require('./webpack.config.base')
 const merge = require('webpack-merge')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
@@ -41,14 +41,14 @@ module.exports = smp.wrap(
               priority: 2,
               minChunks: 3
             },
-            reactBase: {
-              name: 'reactBase',
-              test: module => {
-                return /react|redux|prop-types/.test(module.context)
-              },
-              chunks: 'initial',
-              priority: 10
-            },
+            // reactBase: {
+            //   name: 'reactBase',
+            //   test: module => {
+            //     return /react|redux|prop-types/.test(module.context)
+            //   },
+            //   chunks: 'initial',
+            //   priority: 10
+            // },
             vueBase: {
               name: 'vueBase',
               test: module => {
