@@ -1,5 +1,5 @@
 <template>
-  <div>bbb</div>
+  <div>bbb{{ params }}</div>
 </template>
 
 <script>
