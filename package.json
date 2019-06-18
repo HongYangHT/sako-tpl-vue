@@ -6,6 +6,7 @@
   "scripts": {
     "test": "test",
     "eslint": "eslint --ext .js,.vue --fix src",
+    "stylelint": "stylelint src/**/*.css src/**/*.scss src/**/*.sass src/**/*.less --fix",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --color --progress --config build/webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.build.js",
     "analyzer": "cross-env NODE_ENV=production webpack --config build/webpack.config.analyzer.js"
@@ -63,6 +64,9 @@
     "prettier-eslint-cli": "^4.7.1",
     "sass-loader": "^7.1.0",
     "speed-measure-webpack-plugin": "^1.3.1",
+    "stylelint": "^10.0.1",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-webpack-plugin": "^0.10.5",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "terser-webpack-plugin": "^1.2.4",
@@ -97,6 +101,7 @@
   "lint-staged": {
     "src/**/*.{js,vue}": [
       "npm run eslint",
+      "npm run stylelint",
       "git add"
     ]
   }

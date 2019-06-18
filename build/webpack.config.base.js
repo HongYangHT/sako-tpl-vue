@@ -5,6 +5,7 @@ const VueConfig = require('./webpack.config.vue')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const merge = require('webpack-merge')
 const devMode = process.env.NODE_ENV !== 'production'
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 // NOTE: 应用了splitChunks, 不再需要设置vender
 
@@ -30,10 +31,6 @@ module.exports = merge(
     entry: {
       app: './src'
       // vendor: venderPackage
-    },
-    output: {
-      path: resolve(__dirname, '../dist'),
-      publicPath: '/'
     },
     module: {
       // 忽略构建时，webpack解析相关的库
@@ -77,6 +74,8 @@ module.exports = merge(
       // 处理html
       new HtmlWebpackPlugin({
         template: './src/index.html',
+        filename: '../index.html',
+        favicon: resolve(__dirname, '../src/asset/ico/favicon.ico'),
         minify: {
           removeComments: true,
           collapseWhitespace: true,
@@ -90,7 +89,10 @@ module.exports = merge(
           minifyURLs: true
         }
       }),
-      new FriendlyErrorsPlugin()
+      new FriendlyErrorsPlugin(),
+      new StyleLintPlugin({
+        files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}']
+      })
     ]
   },
   VueConfig

@@ -4,6 +4,10 @@ const { resolve } = require('path')
 
 module.exports = merge(
   {
+    output: {
+      path: resolve(__dirname, '../dist'),
+      publicPath: '/'
+    },
     optimization: {
       runtimeChunk: true
     },

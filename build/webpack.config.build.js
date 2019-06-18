@@ -16,11 +16,11 @@ module.exports = smp.wrap(
   merge(
     {
       output: {
-        path: resolve(__dirname, '../dist'),
+        path: resolve(__dirname, '../dist/asset'),
         publicPath: '/',
         libraryTarget: 'umd',
-        filename: '[name].[chunkhash].js',
-        chunkFilename: '[name].[chunkhash].js',
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[name].[chunkhash].js',
         umdNamedDefine: true
       },
       optimization: {
@@ -109,12 +109,8 @@ module.exports = smp.wrap(
           dry: false
         }),
         new MiniCssExtractPlugin({
-          filename: devMode
-            ? 'asset/css/[name].css'
-            : 'asset/css/[name].[hash].css',
-          chunkFilename: devMode
-            ? 'asset/css/[id].css'
-            : 'asset/css/[id].[hash].css'
+          filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
+          chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css'
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.HashedModuleIdsPlugin()
