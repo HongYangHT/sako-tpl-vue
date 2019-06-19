@@ -17,7 +17,7 @@ module.exports = smp.wrap(
     {
       output: {
         path: resolve(__dirname, '../dist/asset'),
-        publicPath: '/',
+        publicPath: '/asset/',
         libraryTarget: 'umd',
         filename: 'js/[name].[chunkhash].js',
         chunkFilename: 'js/[name].[chunkhash].js',

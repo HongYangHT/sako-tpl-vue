@@ -14,7 +14,7 @@ module.exports = [
                 : MiniCssExtractPlugin.loader,
             options: {
               hmr: process.env.NODE_ENV === 'development',
-              publicPath: resolve('/dist/css')
+              publicPath: resolve('/dist/asset/css')
             }
           },
           {
@@ -62,7 +62,7 @@ module.exports = [
                 : MiniCssExtractPlugin.loader,
             options: {
               hmr: process.env.NODE_ENV === 'development',
-              publicPath: resolve('/dist/css')
+              publicPath: resolve('/dist/asset/css')
             }
           },
           {
