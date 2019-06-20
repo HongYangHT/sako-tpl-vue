@@ -9,7 +9,8 @@
     "stylelint": "stylelint src/**/*.css src/**/*.scss src/**/*.sass src/**/*.less --fix",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --color --progress --config build/webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.build.js",
-    "analyzer": "cross-env NODE_ENV=production webpack --config build/webpack.config.analyzer.js"
+    "analyzer": "cross-env NODE_ENV=production webpack --config build/webpack.config.analyzer.js",
+    "server": "http-server dist/ -o -g -p 8008"
   },
   "repository": {
     "type": "git",

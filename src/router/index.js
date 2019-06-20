@@ -24,21 +24,21 @@ export default new Router({
       path: '/403',
       name: '403',
       component: () =>
-        import(/* webpackChunkName: "notFound" */ '@/modules/exception/403.vue')
+        import(/* webpackChunkName: "403" */ '@/modules/exception/403.vue')
     },
     {
       // 会匹配所有路径
       path: '/500',
       name: '500',
       component: () =>
-        import(/* webpackChunkName: "notFound" */ '@/modules/exception/500.vue')
+        import(/* webpackChunkName: "500" */ '@/modules/exception/500.vue')
     },
     {
       // 会匹配所有路径
       path: '*',
       name: '404',
       component: () =>
-        import(/* webpackChunkName: "notFound" */ '@/modules/exception/404.vue')
+        import(/* webpackChunkName: "404" */ '@/modules/exception/404.vue')
     }
   ]
 })

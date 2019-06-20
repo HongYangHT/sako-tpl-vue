@@ -17,11 +17,11 @@ module.exports = smp.wrap(
   merge(
     {
       output: {
-        path: resolve(__dirname, '../dist'),
-        publicPath: '/',
+        path: resolve(__dirname, '../dist/asset'),
+        publicPath: '/asset/',
         libraryTarget: 'umd',
-        filename: '[name].[chunkhash].js',
-        chunkFilename: '[name].[chunkhash].js',
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[name].[chunkhash].js',
         umdNamedDefine: true
       },
       optimization: {
