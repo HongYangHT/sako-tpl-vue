@@ -9,6 +9,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 const BaseConfig = require('./webpack.config.base')
 const merge = require('webpack-merge')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 const smp = new SpeedMeasurePlugin()
 
@@ -19,7 +20,7 @@ module.exports = smp.wrap(
         path: resolve(__dirname, '../dist/asset'),
         publicPath: '/asset/',
         libraryTarget: 'umd',
-        filename: 'js/[name].[chunkhash].js',
+        filename: 'js/[name].[contenthash].js',
         chunkFilename: 'js/[name].[chunkhash].js',
         umdNamedDefine: true
       },
@@ -56,7 +57,7 @@ module.exports = smp.wrap(
               chunks: 'initial',
               priority: 12
             },
-            commons: {
+            chunkCommon: {
               name: 'chunk-commons',
               test: resolve('src/components'), // 可自定义拓展你的规则
               minChunks: 2, // 最小共用次数
@@ -109,11 +110,18 @@ module.exports = smp.wrap(
           dry: false
         }),
         new MiniCssExtractPlugin({
-          filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
-          chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css'
+          filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash].css',
+          chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash].css'
         }),
         new webpack.NamedModulesPlugin(),
-        new webpack.HashedModuleIdsPlugin()
+        new webpack.HashedModuleIdsPlugin(),
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+          threshold: 10240,
+          minRatio: 0.8
+        })
       ]
     },
     BaseConfig

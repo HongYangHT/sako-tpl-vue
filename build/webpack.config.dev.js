@@ -2,8 +2,11 @@ const BaseConfig = require('./webpack.config.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
 const { resolve } = require('path')
+const config = require('./config')
+const portfinder = require('portfinder')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
-module.exports = merge(BaseConfig, {
+const devWebpackConfig = merge(BaseConfig, {
   output: {
     path: resolve(__dirname, '../dist'),
     publicPath: '/',
@@ -14,16 +17,22 @@ module.exports = merge(BaseConfig, {
   },
   devServer: {
     contentBase: resolve(__dirname, '../dist'),
+    clientLogLevel: 'warning',
     compress: true,
     open: true,
-    port: 8000,
+    port: config.port,
     hot: true,
     overlay: {
-      warnings: true,
+      warnings: false,
       errors: true
     },
     hotOnly: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    quiet: true, // necessary for FriendlyErrorsPlugin
+    watchOptions: {
+      poll: false
+    },
+    proxy: config.proxy
   },
   plugins: [
     // NOTE: webpack4 不需要
@@ -47,4 +56,32 @@ module.exports = merge(BaseConfig, {
       }
     })
   ]
+})
+
+module.exports = new Promise((resolve, reject) => {
+  portfinder.basePort = process.env.PORT || config.port
+  portfinder.getPort((err, port) => {
+    if (err) {
+      reject(err)
+    } else {
+      // publish the new Port, necessary for e2e tests
+      process.env.PORT = port
+      // add port to devServer config
+      devWebpackConfig.devServer.port = port
+
+      // Add FriendlyErrorsPlugin
+      devWebpackConfig.plugins.push(
+        new FriendlyErrorsPlugin({
+          compilationSuccessInfo: {
+            messages: [
+              `Your application is running here: http://${devWebpackConfig
+                .devServer.host || 'localhost'}:${port}`
+            ]
+          }
+        })
+      )
+
+      resolve(devWebpackConfig)
+    }
+  })
 })

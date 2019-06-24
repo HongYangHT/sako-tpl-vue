@@ -2,7 +2,6 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { resolve } = require('path')
 const VueConfig = require('./webpack.config.vue')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const merge = require('webpack-merge')
 const devMode = process.env.NODE_ENV !== 'production'
 const StyleLintPlugin = require('stylelint-webpack-plugin')
@@ -32,6 +31,7 @@ module.exports = merge(
       app: './src'
       // vendor: venderPackage
     },
+    devtool: devMode ? 'inline-source-map' : 'source-map',
     module: {
       // 忽略构建时，webpack解析相关的库
       // noParse: function(lib) {
@@ -48,7 +48,8 @@ module.exports = merge(
           include: resolve(__dirname, '/src/**'),
           loader: 'eslint-loader',
           options: {
-            fix: true
+            fix: true,
+            formatter: require('eslint-friendly-formatter')
           }
         }
       ]
@@ -89,7 +90,6 @@ module.exports = merge(
           minifyURLs: true
         }
       }),
-      new FriendlyErrorsPlugin(),
       new StyleLintPlugin({
         files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}']
       })

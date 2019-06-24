@@ -4,7 +4,8 @@
       "@babel/preset-env",
       {
         "targets": {
-          "node": 6
+          "node": 6,
+          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
         }
       }
     ]
@@ -24,6 +25,8 @@
     }
   },
   "plugins": [
+    "@vue/babel-plugin-transform-vue-jsx",
+    "@babel/plugin-transform-runtime",
     "@babel/plugin-syntax-dynamic-import",
     [
       "import",
