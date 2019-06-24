@@ -63,7 +63,12 @@ module.exports = merge(
         moment: 'moment',
         lodash: 'lodash',
         vuex: 'vuex',
-        'vue-router': 'vue-router'
+        'vue-router': 'vue-router',
+        '@ant-design/icons/lib/dist$': resolve(
+          __dirname,
+          './config/ant-icon.js'
+        )
+        // NOTE: 设置ant的图标
         // react: 'react',
         // 'react-router': 'react-router',
         // redux: 'redux'

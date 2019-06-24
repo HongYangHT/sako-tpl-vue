@@ -57,12 +57,18 @@ module.exports = smp.wrap(
               chunks: 'initial',
               priority: 12
             },
-            commons: {
-              name: 'chunk-commons',
+            componentCommon: {
+              name: 'component-commons',
               test: resolve('src/components'), // 可自定义拓展你的规则
               minChunks: 2, // 最小共用次数
               priority: 5,
               reuseExistingChunk: true
+            },
+            chunkCommon: {
+              name: 'chunk-common',
+              chunks: 'async',
+              priority: 10,
+              minChunks: 3 // 最小共用次数
             },
             commonStyle: {
               name: 'commonStyle',
