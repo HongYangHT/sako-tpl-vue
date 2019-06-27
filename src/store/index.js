@@ -5,11 +5,16 @@ import createPersistedState from 'vuex-persistedstate'
 import { getAppCount } from '@/store/utils/lib'
 import { KEY_STORE, KEY_APP_COUNT } from '@/store/utils/constants'
 
+import home from './module/home'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+  namespaced: true,
   state: {},
-  modules: {},
+  modules: {
+    home
+  },
   // 缓存vuex状态对象
   plugins: [
     createPersistedState({

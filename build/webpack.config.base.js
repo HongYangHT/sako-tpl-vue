@@ -68,6 +68,7 @@ module.exports = merge(
           __dirname,
           './config/ant-icon.js'
         )
+        // 'video.js': 'video.js/dist/video.min.js'
         // NOTE: 设置ant的图标
         // react: 'react',
         // 'react-router': 'react-router',

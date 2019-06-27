@@ -17,7 +17,9 @@ export default new Router({
       path: '/',
       name: 'home',
       component: () =>
-        import(/* webpackChunkName: "index" */ '@/modules/index.vue')
+        import(/* webpackChunkName: "index" */ '@/modules/index.vue'),
+      meta: {},
+      props: route => ({ query: route.query.id })
     },
     {
       // 会匹配所有路径

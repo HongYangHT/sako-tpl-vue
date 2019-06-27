@@ -3,15 +3,21 @@ import Vue from 'vue'
 import App from './modules/app.vue'
 import router from './router'
 import store from './store'
-import('./css/index.scss')
+import { sync } from 'vuex-router-sync'
 // NOTE: 采取懒加载的模式
 // import Antd from "ant-design-vue"
 // import 'ant-design-vue/dist/antd.css'
 // Vue.use(Antd)
 
+import i18nManager from '@/utils/i18n'
+
+// 将路由状态同步到store中
+sync(store, router)
+
 new Vue({
-  el: '#app',
+  el: "#app",
   router,
   store,
-	render: h => h(App)
-})
+  i18n: i18nManager.i18n,
+  render: h => h(App)
+});

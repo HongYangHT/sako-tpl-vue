@@ -1,18 +1,58 @@
 <template>
   <div class="container">
-    <a-button type="primary" @click="$_onNav">跳转</a-button>
+    <video-player ref="player" :params="videoOptions" />
+    <a-button type="primary" class="mt-1" @click="$_onNav">跳转</a-button>
   </div>
 </template>
 
 <script>
 import { Button } from 'ant-design-vue'
+import VideoPlayer from '@/modules/components/play-video/index.vue'
 export default {
   components: {
-    [Button.name]: Button
+    [Button.name]: Button,
+    VideoPlayer
   },
   data() {
     return {
-      params: 123
+      params: 123,
+      videoOptions: {
+        controlBar: {
+          children: [
+            {
+              name: 'playToggle'
+            },
+            {
+              name: 'progressControl'
+            },
+            {
+              name: 'currentTimeDisplay'
+            },
+            {
+              name: 'timeDivider'
+            },
+            {
+              name: 'durationDisplay'
+            },
+            {
+              name: 'volumePanel',
+              inline: false
+            },
+            {
+              name: 'fullscreenToggle'
+            }
+          ]
+        },
+        autoplay: false,
+        controls: true,
+        language: 'zh-CN',
+        preauto: 'auto',
+        width: '100%',
+        height: '400',
+        src:
+          'http://10.1.241.36:81/asiainfo-product-portal1/product/48d3306e065ba57b392bae4951952db6.mp4',
+        playbackRates: [0.7, 1.0, 1.5, 2.0]
+      }
     }
   },
   computed: {
@@ -34,5 +74,10 @@ export default {
   align-items: center;
   justify-content: center;
   padding-top: 140px;
+  flex-direction: column;
+}
+
+.mt-1 {
+  margin-top: 15px;
 }
 </style>
