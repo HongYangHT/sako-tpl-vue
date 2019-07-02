@@ -1,6 +1,6 @@
 class Storage {
-  constructor() {
-    this.storageProxy = window.sessionStorage || window.localStorage
+  constructor(store) {
+    this.storageProxy = store
     this.defaultLiftTime = 30 * 24 * 60 * 60 * 1000
     this.keyCache = 'SE_OK_PORTAL_KEY_TIMEOUT_MAP'
   }
@@ -204,4 +204,18 @@ class Storage {
   }
 }
 
-export default new Storage()
+// NOTE: 没有定义 `constructor` 相单于下面代码
+/*
+  constructor(...args) {
+    super(...args)
+  }
+*/
+
+class LocalStorage extends Storage {}
+
+class SessionStorage extends Storage {}
+
+export const localStore = new LocalStorage(window.localStorage || localStorage)
+export const sesssionStore = new SessionStorage(
+  window.sessionStorage || sessionStorage
+)
