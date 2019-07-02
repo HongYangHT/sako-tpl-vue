@@ -4,7 +4,7 @@
  * @Description: 基础的service请求
  * 做此设计是为了更加清晰明了的设计api的请求
  * @Date: 2019-06-27 15:11:12
- * @LastEditTime: 2019-06-27 17:01:42
+ * @LastEditTime: 2019-07-02 15:55:00
  */
 import axios from 'axios'
 import config from '@/utils/http/config'
@@ -37,7 +37,7 @@ class BaseService {
 
     // NOTE: 先默认新建一个 `axios` 实例
     const baseAxios = axios.create({
-      baseUrl: basePath ? baseUrl + '/' + basePath : baseUrl,
+      baseURL: basePath ? baseUrl + '/' + basePath : baseUrl,
       timeout
     })
 

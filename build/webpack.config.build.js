@@ -115,6 +115,28 @@ module.exports = smp.wrap(
           verbose: true,
           dry: false
         }),
+        new OptimizeCSSAssetsPlugin({
+          assetNameRegExp: /\.css\.*(?!.*map)/g,
+          cssProcessor: require('cssnano'), // 引入cssnano配置压缩选项
+          cssProcessorOptions: {
+            map: {
+              // 不生成内联映射,这样配置就会生成一个source-map文件
+              inline: false,
+              // 向css文件添加source-map路径注释
+              // 如果没有此项压缩后的css会去除source-map路径注释
+              annotation: true
+            },
+            discardComments: { removeAll: true },
+            // 避免 cssnano 重新计算 z-index
+            safe: true,
+            // cssnano 集成了autoprefixer的功能
+            // 会使用到autoprefixer进行无关前缀的清理
+            // 关闭autoprefixer功能
+            // 使用postcss的autoprefixer功能
+            autoprefixer: false
+          },
+          canPrint: true // 是否将插件信息打印到控制台
+        }),
         new MiniCssExtractPlugin({
           filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash].css',
           chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash].css'
@@ -125,8 +147,10 @@ module.exports = smp.wrap(
           filename: '[path].gz[query]',
           algorithm: 'gzip',
           test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
-          threshold: 10240,
-          minRatio: 0.8
+          // NOTE: 设置生成`gzip`文件大小 100K
+          threshold: 100 * 1024,
+          minRatio: 0.8,
+          cache: true
         })
       ]
     },

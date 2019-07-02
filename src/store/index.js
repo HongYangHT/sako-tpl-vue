@@ -5,13 +5,22 @@ import createPersistedState from 'vuex-persistedstate'
 import { getAppCount } from '@/store/utils/lib'
 import { KEY_STORE, KEY_APP_COUNT } from '@/store/utils/constants'
 
+import * as actions from './actions'
+import mutations from './mutations'
+import getters from './getters'
+
 import home from './module/home'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   namespaced: true,
-  state: {},
+  state: {
+    poems: []
+  },
+  actions,
+  mutations,
+  getters,
   modules: {
     home
   },

@@ -8,6 +8,8 @@
 <script>
 import { Button } from 'ant-design-vue'
 import VideoPlayer from '@/modules/components/play-video/index.vue'
+import { mapActions, mapState } from 'vuex'
+
 export default {
   components: {
     [Button.name]: Button,
@@ -56,11 +58,27 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      poems: state => state.poems
+    }),
     paramb() {
       return 2
     }
   },
+  created() {
+    this.$_getHomeInit()
+      .then(result => {
+        console.log(result)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  },
   methods: {
+    ...mapActions(['getHomeInit']),
+    async $_getHomeInit(params) {
+      return this.getHomeInit(params)
+    },
     $_onNav() {
       this.$router.push({ name: '403' })
     }

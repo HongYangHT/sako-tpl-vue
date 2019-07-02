@@ -11,6 +11,8 @@ import { sync } from 'vuex-router-sync'
 
 import i18nManager from '@/utils/i18n'
 
+import 'normalize.css'
+
 // 将路由状态同步到store中
 sync(store, router)
 

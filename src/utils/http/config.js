@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: http 请求配置文件
  * @Date: 2019-06-27 15:22:55
- * @LastEditTime: 2019-06-27 15:43:51
+ * @LastEditTime: 2019-07-02 15:38:21
  */
 
 export default {
