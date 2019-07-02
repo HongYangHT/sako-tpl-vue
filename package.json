@@ -119,6 +119,7 @@
     "src/**/*.{js,vue}": [
       "npm run eslint",
       "npm run stylelint",
+      "npm run build",
       "git add"
     ]
   }

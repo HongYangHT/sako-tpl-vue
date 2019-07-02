@@ -1,6 +1,6 @@
 class Storage {
   constructor() {
-    this.storageProxy = window.sessionStorage
+    this.storageProxy = window.sessionStorage || window.localStorage
     this.defaultLiftTime = 30 * 24 * 60 * 60 * 1000
     this.keyCache = 'SE_OK_PORTAL_KEY_TIMEOUT_MAP'
   }
