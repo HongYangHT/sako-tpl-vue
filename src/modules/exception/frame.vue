@@ -5,6 +5,7 @@
       <div class="desc">{{ config[type].desc }}</div>
       <div class="action">
         <a-button type="primary" @click="$_handleToHome">返回首页</a-button>
+        <p>{{ $t('t.code') }}</p>
       </div>
     </div>
   </div>

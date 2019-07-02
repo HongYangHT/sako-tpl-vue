@@ -16,10 +16,15 @@ import 'normalize.css'
 // 将路由状态同步到store中
 sync(store, router)
 
+router.beforeEach((to, from, next) => {
+  const lang = to.params.lang || navigator.language || 'zh-CN'
+  i18nManager.loadLanguageAsync(lang).then(() => next())
+})
+
 new Vue({
-  el: "#app",
+  el: '#app',
   router,
   store,
   i18n: i18nManager.i18n,
   render: h => h(App)
-});
+})

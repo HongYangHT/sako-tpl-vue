@@ -2,6 +2,7 @@
   <div class="container">
     <video-player ref="player" :params="videoOptions" />
     <a-button type="primary" class="mt-1" @click="$_onNav">跳转</a-button>
+    <p>{{ $t('t.code') }}</p>
   </div>
 </template>
 
@@ -80,7 +81,12 @@ export default {
       return this.getHomeInit(params)
     },
     $_onNav() {
-      this.$router.push({ name: '403' })
+      this.$router.push({
+        name: '403',
+        params: {
+          lang: 'en-us'
+        }
+      })
     }
   }
 }
