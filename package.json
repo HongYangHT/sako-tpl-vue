@@ -112,14 +112,13 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run eslint && npm run stylelint && git add"
+      "pre-push": "npm run eslint && npm run stylelint && npm run build && git add"
     }
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [
       "npm run eslint",
       "npm run stylelint",
-      "npm run build",
       "git add"
     ]
   }
