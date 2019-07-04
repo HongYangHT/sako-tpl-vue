@@ -10,7 +10,10 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --color --progress --config build/webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.build.js",
     "analyzer": "cross-env NODE_ENV=production webpack --config build/webpack.config.analyzer.js",
-    "server": "http-server dist/ -o -g -p 8008"
+    "server": "http-server dist/ -o -g -p 8008",
+    "predeploy": "npm version patch",
+    "prePushGit": "npm run eslint && npm run stylelint && npm run predeploy && npm run build",
+    "prePushConCurrently": "concurrently \"npm:eslint\" \"npm:stylelint\" \"npm:predeploy\""
   },
   "repository": {
     "type": "git",
@@ -39,6 +42,7 @@
     "babel-plugin-import": "^1.12.0",
     "clean-webpack-plugin": "^2.0.2",
     "compression-webpack-plugin": "^3.0.0",
+    "concurrently": "^4.1.1",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
@@ -112,7 +116,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run eslint && npm run stylelint && npm run build && git add"
+      "pre-push": "npm run prePushGit"
     }
   },
   "lint-staged": {

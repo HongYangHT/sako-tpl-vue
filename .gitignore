@@ -7,4 +7,4 @@ dist
 output
 examples/*
 yarn.lock
-package-lock.json
+# package-lock.json
