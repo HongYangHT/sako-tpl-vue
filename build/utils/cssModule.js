@@ -35,12 +35,13 @@ module.exports = [
               plugins: loader => [
                 // 可以配置多个插件
                 require('autoprefixer')({
-                  browsers: [
+                  overrideBrowserslist: [
                     'last 10 Chrome versions',
                     'last 5 Firefox versions',
                     'Safari >= 6',
                     'ie > 8'
-                  ]
+                  ],
+                  grid: true
                 })
               ]
             }
@@ -78,13 +79,15 @@ module.exports = [
               sourceMap: true,
               plugins: loader => [
                 // 可以配置多个插件
+                // NOTE: new feature should change browsers to overrideBrowserslist
                 require('autoprefixer')({
-                  browsers: [
+                  overrideBrowserslist: [
                     'last 10 Chrome versions',
                     'last 5 Firefox versions',
                     'Safari >= 6',
                     'ie > 8'
-                  ]
+                  ],
+                  grid: true
                 })
               ]
             }

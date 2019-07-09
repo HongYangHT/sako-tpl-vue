@@ -110,6 +110,10 @@ module.exports = smp.wrap(
         ]
       },
       plugins: [
+        new webpack.BannerPlugin({
+          banner:
+            'hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
+        }),
         new CleanWebpackPlugin({
           cleanOnceBeforeBuildPatterns: ['**/*'],
           verbose: true,

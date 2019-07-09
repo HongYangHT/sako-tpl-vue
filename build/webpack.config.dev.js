@@ -5,10 +5,11 @@ const { resolve } = require('path')
 const config = require('./config')
 const portfinder = require('portfinder')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+// const { SkeletonPlugin } = require('page-skeleton-webpack-plugin')
 
 const devWebpackConfig = merge(BaseConfig, {
   output: {
-    path: resolve(__dirname, '../dist'),
+    path: resolve(__dirname, './dist'),
     publicPath: '/',
     libraryTarget: 'umd',
     filename: 'js/[name].js',
@@ -55,6 +56,12 @@ const devWebpackConfig = merge(BaseConfig, {
         minifyURLs: true
       }
     })
+    // new SkeletonPlugin({
+    //   pathname: resolve(__dirname, './shell'), // 用来存储 shell 文件的地址
+    //   staticDir: resolve(__dirname, './dist'), // 最好和 `output.path` 相同
+    //   routes: ['/'], // 将需要生成骨架屏的路由添加到数组中
+    //   port: '9999'
+    // })
   ]
 })
 
