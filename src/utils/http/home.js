@@ -12,6 +12,7 @@ class HomeService extends BaseService {
     super(options)
     this.baseUrl = options.baseUrl
   }
+
   /**
    * 初始化接口
    * @param {*} path

@@ -34,7 +34,7 @@ const store = new Vuex.Store({
 })
 
 window.addEventListener('unload', () => {
-  let appCount = getAppCount()
+  const appCount = getAppCount()
   if (appCount > 1) {
     // 递减应用实例个数
     window.localStorage.setItem(KEY_APP_COUNT, appCount - 1)

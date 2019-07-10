@@ -37,7 +37,7 @@ class BaseService {
 
     // NOTE: 先默认新建一个 `axios` 实例
     const baseAxios = axios.create({
-      baseURL: basePath ? baseUrl + '/' + basePath : baseUrl,
+      baseURL: basePath ? `${baseUrl}/${basePath}` : baseUrl,
       timeout
     })
 

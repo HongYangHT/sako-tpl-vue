@@ -11,8 +11,9 @@
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.build.js",
     "analyzer": "cross-env NODE_ENV=production webpack --config build/webpack.config.analyzer.js",
     "server": "http-server dist/ -o -g -p 8008",
+    "precommit": "lint-staged && npm run build",
     "predeploy": "npm version patch",
-    "prePushGit": "npm run eslint && npm run stylelint && npm run build",
+    "prePushGit": "npm run eslint && npm run stylelint",
     "prePushConCurrently": "concurrently \"npm:eslint\" \"npm:stylelint\" \"npm:predeploy\""
   },
   "repository": {
@@ -48,6 +49,7 @@
     "cssnano": "^4.1.10",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.16.0",
+    "eslint-config-ali": "^7.0.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-friendly-formatter": "^4.0.1",

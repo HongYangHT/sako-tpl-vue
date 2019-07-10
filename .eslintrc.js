@@ -9,8 +9,16 @@ module.exports = {
     node: true,
     "jest/globals": true
   },
-  extends: ["standard", "plugin:vue/essential", "plugin:prettier/recommended"],
+  extends: [
+    // "eslint-config-ali/vue", // NOTE: 比较严格
+    "standard",
+    "plugin:vue/essential",
+    "prettier",
+    "plugin:prettier/recommended"
+    // "plugin:standard/recommended"
+  ],
   plugins: ["vue", "jest"],
+  globals: {},
   rules: {
     // NOTE: for vue eslint
     // eslint-plugin-vue
@@ -54,6 +62,7 @@ module.exports = {
     "prettier/prettier": [
       "error",
       {
+        printWidth: 100,
         singleQuote: true,
         trailingComma: "none",
         bracketSpacing: true,

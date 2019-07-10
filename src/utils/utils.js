@@ -32,7 +32,7 @@ export function isPrimitive(value) {
  * @param {*} value
  */
 export function isObject(value) {
-  let type = typeof value
+  const type = typeof value
   return value != null && (type === 'object' || type === 'function')
 }
 
@@ -106,10 +106,7 @@ export function isFunction(value) {
  */
 export function isLength(value) {
   return (
-    typeof value === 'number' &&
-    value > -1 &&
-    value % 1 === 0 &&
-    value <= Number.MAX_SAFE_INTEGER
+    typeof value === 'number' && value > -1 && value % 1 === 0 && value <= Number.MAX_SAFE_INTEGER
   )
 }
 
@@ -132,7 +129,7 @@ export function isEmpty(value) {
   if (isArrayLike(value)) {
     return !value.length
   } else if (isPlainObject(value)) {
-    for (let key in value) {
+    for (const key in value) {
       if (hasOwnProperty.call(value, key)) {
         return false
       }
@@ -142,7 +139,7 @@ export function isEmpty(value) {
   return false
 }
 
-let camelizeRE = /-(\w)/g
+const camelizeRE = /-(\w)/g
 /**
  * 转化驼峰
  * @param {*} str
@@ -153,7 +150,7 @@ export function camelize(str) {
   })
 }
 
-let hyphenateRE = /\B([A-Z])/g
+const hyphenateRE = /\B([A-Z])/g
 /**
  * 转化连字符
  * @param {*} str
@@ -176,7 +173,7 @@ export function capitalize(str) {
  * @param {*} _from
  */
 export function extend(to, _from) {
-  for (let key in _from) {
+  for (const key in _from) {
     to[key] = _from[key]
   }
   return to
@@ -188,8 +185,7 @@ export function extend(to, _from) {
  * @param {*} target
  */
 export function swollowClone(source, target) {
-  if (arguments.length === 0)
-    throw new TypeError('Cannot convert undefined or null to object')
+  if (arguments.length === 0) throw new TypeError('Cannot convert undefined or null to object')
 
   let key
   target.forEach(function(item) {
@@ -217,15 +213,14 @@ export function clone(value, deep = true) {
     return value.map(item => (deep ? clone(item, deep) : item))
   } else if (isPlainObject(value)) {
     // 是对象
-    let target = {}
+    const target = {}
     let key
     for (key in value) {
-      value.hasOwnProperty(key) &&
-        (target[key] = deep ? clone(value[key], deep) : value[key])
+      value.hasOwnProperty(key) && (target[key] = deep ? clone(value[key], deep) : value[key])
     }
   }
 
-  let type = getRawType(value)
+  const type = getRawType(value)
 
   switch (type) {
     case 'Date':
@@ -246,14 +241,14 @@ export function unique(arr) {
     // 不是类数组对象
     return arr
   }
-  let result = []
-  let objarr = []
-  let obj = Object.create(null)
+  const result = []
+  const objarr = []
+  const obj = Object.create(null)
 
   arr.forEach(item => {
     if (isStatic(item)) {
       // 是除了symbol外的原始数据
-      let key = item + '_' + getRawType(item)
+      const key = `${item}_${getRawType(item)}`
       if (!obj[key]) {
         obj[key] = true
         result.push(item)
@@ -276,13 +271,13 @@ export function unique(arr) {
  * @param {*} t
  */
 export function dateFormater(formater, t) {
-  let date = t ? new Date(t) : new Date()
-  let Y = date.getFullYear() + ''
-  let M = date.getMonth() + 1
-  let D = date.getDate()
-  let H = date.getHours()
-  let m = date.getMinutes()
-  let s = date.getSeconds()
+  const date = t ? new Date(t) : new Date()
+  const Y = `${date.getFullYear()}`
+  const M = date.getMonth() + 1
+  const D = date.getDate()
+  const H = date.getHours()
+  const m = date.getMinutes()
+  const s = date.getSeconds()
   return formater
     .replace(/YYYY|yyyy/g, Y)
     .replace(/YY|yy/g, Y.substr(2, 2))
@@ -304,11 +299,11 @@ export function getPropByPath(obj, path, strict) {
   path = path.replace(/\[(\w+)\]/g, '.$1') // 将[0]转化为.0
   path = path.replace(/^\./, '') // 去除开头的.
 
-  let keyArr = path.split('.') // 根据.切割
+  const keyArr = path.split('.') // 根据.切割
   let i = 0
   for (let len = keyArr.length; i < len - 1; ++i) {
     if (!tempObj && !strict) break
-    let key = keyArr[i]
+    const key = keyArr[i]
     if (key in tempObj) {
       tempObj = tempObj[key]
     } else {
@@ -330,9 +325,9 @@ export function getPropByPath(obj, path, strict) {
  * 查询参数
  */
 export function GetUrlParam() {
-  let url = document.location.toString()
+  const url = document.location.toString()
   let arrObj = url.split('?')
-  let params = Object.create(null)
+  const params = Object.create(null)
   if (arrObj.length > 1) {
     arrObj = arrObj[1].split('&')
     arrObj.forEach(item => {
@@ -347,7 +342,7 @@ export function GetUrlParam() {
  * 设置全屏
  */
 export function toFullScreen() {
-  let elem = document.body
+  const elem = document.body
   elem.webkitRequestFullScreen
     ? elem.webkitRequestFullScreen()
     : elem.mozRequestFullScreen
@@ -363,7 +358,7 @@ export function toFullScreen() {
  * 退出全屏
  */
 export function exitFullscreen() {
-  let elem = parent.document
+  const elem = parent.document
   elem.webkitCancelFullScreen
     ? elem.webkitCancelFullScreen()
     : elem.mozCancelFullScreen

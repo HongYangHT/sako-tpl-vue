@@ -16,8 +16,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () =>
-        import(/* webpackChunkName: "index" */ '@/modules/index.vue'),
+      component: () => import(/* webpackChunkName: "index" */ '@/modules/index.vue'),
       meta: {},
       props: route => ({ query: route.query.id })
     },
@@ -25,22 +24,19 @@ export default new Router({
       // 会匹配所有路径
       path: '/403/:lang',
       name: '403',
-      component: () =>
-        import(/* webpackChunkName: "403" */ '@/modules/exception/403.vue')
+      component: () => import(/* webpackChunkName: "403" */ '@/modules/exception/403.vue')
     },
     {
       // 会匹配所有路径
       path: '/500/:lang',
       name: '500',
-      component: () =>
-        import(/* webpackChunkName: "500" */ '@/modules/exception/500.vue')
+      component: () => import(/* webpackChunkName: "500" */ '@/modules/exception/500.vue')
     },
     {
       // 会匹配所有路径
       path: '*',
       name: '404',
-      component: () =>
-        import(/* webpackChunkName: "404" */ '@/modules/exception/404.vue')
+      component: () => import(/* webpackChunkName: "404" */ '@/modules/exception/404.vue')
     }
   ]
 })

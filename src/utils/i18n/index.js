@@ -48,14 +48,11 @@ class I18nManager {
    * @param  {VueI18n} i18n `VueI18n`实例对象
    */
   constructor() {
-    let browserLanguage = navigator.language
+    const browserLanguage = navigator.language
     let localLanguage = window.localStorage.getItem(STORAGE_KEY)
 
     if (!localLanguage) {
-      localLanguage =
-        SUPORTED_LIST.indexOf(browserLanguage) >= 0
-          ? browserLanguage
-          : DEFAULT_LANG
+      localLanguage = SUPORTED_LIST.indexOf(browserLanguage) >= 0 ? browserLanguage : DEFAULT_LANG
     }
 
     /**
@@ -84,13 +81,14 @@ class I18nManager {
       }
     })
   }
+
   /**
    * 设置语言
    * @private
    * @param {String} newLanguage 新语言
    */
   _setLanguage(newLanguage) {
-    let oldLanguage = this._i18n.locale
+    const oldLanguage = this._i18n.locale
     if (oldLanguage === newLanguage) {
       // 先设置为一个生僻国家，否则反复设置locale不会刷新视图
       this._i18n.locale = EMPTY_LANG
@@ -103,6 +101,7 @@ class I18nManager {
     bus.$emit('g-i18n-language-changed', newLanguage, oldLanguage) // 通知其他对象语言已改变
     return newLanguage
   }
+
   /**
    * 获得当前语言
    * @property
@@ -112,6 +111,7 @@ class I18nManager {
   get language() {
     return this._i18n.locale
   }
+
   /**
    * 改变语言
    * @param  {String} newLanguage 新语言
@@ -126,6 +126,7 @@ class I18nManager {
       this._setLanguage(newLanguage)
     }
   }
+
   /**
    * 获得`VueI18n`实例
    * @property
@@ -142,13 +143,13 @@ class I18nManager {
   loadLanguageAsync(lang) {
     if (this._i18n.locale !== lang) {
       if (!SUPORTED_LIST.includes(lang)) {
-        return import(
-          /* webpackChunkName: "lang-[request]" */ `@/asset/locals//${lang}`
-        ).then(msgs => {
-          this._i18n.setLocaleMessage(lang, msgs.default)
-          SUPORTED_LIST.push(lang)
-          return this.changeLanguage(lang)
-        })
+        return import(/* webpackChunkName: "lang-[request]" */ `@/asset/locals//${lang}`).then(
+          msgs => {
+            this._i18n.setLocaleMessage(lang, msgs.default)
+            SUPORTED_LIST.push(lang)
+            return this.changeLanguage(lang)
+          }
+        )
       }
       return Promise.resolve(this.changeLanguage(lang))
     }

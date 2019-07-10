@@ -13,6 +13,7 @@
 
 <script>
 import { Button } from 'ant-design-vue'
+
 export default {
   name: 'ExceptionFrame',
   components: {
