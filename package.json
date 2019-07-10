@@ -11,7 +11,7 @@
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.build.js",
     "analyzer": "cross-env NODE_ENV=production webpack --config build/webpack.config.analyzer.js",
     "server": "http-server dist/ -o -g -p 8008",
-    "precommit": "lint-staged && npm run build",
+    "precommit": "lint-staged",
     "predeploy": "npm version patch",
     "prePushGit": "npm run eslint && npm run stylelint",
     "prePushConCurrently": "concurrently \"npm:eslint\" \"npm:stylelint\" \"npm:predeploy\""
@@ -125,6 +125,7 @@
     "src/**/*.{js,vue}": [
       "npm run eslint",
       "npm run stylelint",
+      "npm run build",
       "git add"
     ]
   }
