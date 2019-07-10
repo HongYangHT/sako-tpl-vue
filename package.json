@@ -128,7 +128,8 @@
       "git add"
     ],
     "*": [
-      "npm run build"
+      "npm run build",
+      "git add"
     ]
   }
 }
