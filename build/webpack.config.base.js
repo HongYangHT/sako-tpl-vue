@@ -64,10 +64,7 @@ module.exports = merge(
         lodash: 'lodash',
         vuex: 'vuex',
         'vue-router': 'vue-router',
-        '@ant-design/icons/lib/dist$': resolve(
-          __dirname,
-          './config/ant-icon.js'
-        )
+        '@ant-design/icons/lib/dist$': resolve(__dirname, './config/ant-icon.js')
         // 'video.js': 'video.js/dist/video.min.js'
         // NOTE: 设置ant的图标
         // react: 'react',
