@@ -8,6 +8,9 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 // const { SkeletonPlugin } = require('page-skeleton-webpack-plugin')
 
 const devWebpackConfig = merge(BaseConfig, {
+  entry: {
+    'single-spa': './src/micro'
+  },
   output: {
     path: resolve(__dirname, './dist'),
     publicPath: '/asset/',
