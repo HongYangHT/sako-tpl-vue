@@ -5,9 +5,7 @@ module.exports = [
     use: [
       {
         loader:
-          process.env.NODE_ENV !== 'production'
-            ? 'vue-style-loader'
-            : MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
         options: {
           hmr: process.env.NODE_ENV === 'development'
         }

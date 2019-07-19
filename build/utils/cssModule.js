@@ -1,5 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const postcss = require('postcss')
 const { resolve } = require('path')
+const packageJson = require('../../package.json')
 module.exports = [
   {
     test: /\.(sc|sa|c)ss$/,
@@ -42,7 +44,21 @@ module.exports = [
                     'ie > 8'
                   ],
                   grid: true
-                })
+                }),
+                // NOTE: 自定义插件
+                postcss.plugin('namespace', () => css =>
+                  css.walkRules(rule => {
+                    if (
+                      rule.parent &&
+                      rule.parent.type === 'atrule' &&
+                      rule.parent.name !== 'media'
+                    )
+                      return
+                    rule.selectors = rule.selectors.map(
+                      s => `.${packageJson.name} ${s === 'body' ? '' : s}`
+                    )
+                  })
+                )
               ]
             }
           },
@@ -88,7 +104,21 @@ module.exports = [
                     'ie > 8'
                   ],
                   grid: true
-                })
+                }),
+                // NOTE: 自定义插件
+                postcss.plugin('namespace', () => css =>
+                  css.walkRules(rule => {
+                    if (
+                      rule.parent &&
+                      rule.parent.type === 'atrule' &&
+                      rule.parent.name !== 'media'
+                    )
+                      return
+                    rule.selectors = rule.selectors.map(
+                      s => `.${packageJson.name} ${s === 'body' ? '' : s}`
+                    )
+                  })
+                )
               ]
             }
           },

@@ -1,13 +1,13 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const postcss = require('postcss')
+const packageJson = require('../../package.json')
 module.exports = [
   {
     test: /\.less$/,
     use: [
       {
         loader:
-          process.env.NODE_ENV !== 'production'
-            ? 'vue-style-loader'
-            : MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
         options: {
           hmr: process.env.NODE_ENV === 'development'
         }
@@ -33,7 +33,17 @@ module.exports = [
                 'ie > 8'
               ],
               grid: true
-            })
+            }),
+            // NOTE: 自定义插件
+            postcss.plugin('namespace', () => css =>
+              css.walkRules(rule => {
+                if (rule.parent && rule.parent.type === 'atrule' && rule.parent.name !== 'media')
+                  return
+                rule.selectors = rule.selectors.map(
+                  s => `.${packageJson.name} ${s === 'body' ? '' : s}`
+                )
+              })
+            )
           ]
         }
       },
