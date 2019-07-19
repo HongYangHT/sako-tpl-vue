@@ -9,18 +9,19 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const devWebpackConfig = merge(BaseConfig, {
   entry: {
-    'single-spa': './src/micro'
+    'single-spa': './src/micro',
+    'project.config': './src/project.config.js'
   },
   output: {
     path: resolve(__dirname, './dist'),
-    publicPath: '/asset/',
+    // publicPath: '/asset/',
     libraryTarget: 'umd',
     filename: 'js/[name].js',
     chunkFilename: 'js/[name].js',
     umdNamedDefine: true
   },
   devServer: {
-    publicPath: '/asset/',
+    // publicPath: '/asset/',
     contentBase: resolve(__dirname, '../dist'),
     clientLogLevel: 'warning',
     compress: true,

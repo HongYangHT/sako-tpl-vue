@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import packageJson from '../../package.json'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: '/sako/',
+  base: `/${packageJson.name}/`,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition

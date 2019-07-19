@@ -16,14 +16,15 @@ const smp = new SpeedMeasurePlugin()
 module.exports = smp.wrap(
   merge(BaseConfig, {
     entry: {
-      'single-spa': './src/micro'
+      'single-spa': './src/micro',
+      'project.config': './src/project.config.js'
     },
     output: {
       path: resolve(__dirname, '../dist/asset'),
       publicPath: '/asset/',
       libraryTarget: 'umd',
-      filename: 'js/[name].[contenthash].js',
-      chunkFilename: 'js/[name].[chunkhash].js',
+      filename: 'js/[name].js',
+      chunkFilename: 'js/[name].js',
       umdNamedDefine: true
     },
     optimization: {

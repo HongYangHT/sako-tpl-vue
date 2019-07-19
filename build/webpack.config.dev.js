@@ -5,19 +5,18 @@ const { resolve } = require('path')
 const config = require('./config')
 const portfinder = require('portfinder')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-// const { SkeletonPlugin } = require('page-skeleton-webpack-plugin')
 
 const devWebpackConfig = merge(BaseConfig, {
   output: {
     path: resolve(__dirname, './dist'),
-    publicPath: '/asset/',
+    publicPath: '/',
     libraryTarget: 'umd',
     filename: 'js/[name].js',
     chunkFilename: 'js/[name].js',
     umdNamedDefine: true
   },
   devServer: {
-    publicPath: '/asset/',
+    // publicPath: '/asset/',
     contentBase: resolve(__dirname, '../dist'),
     clientLogLevel: 'warning',
     compress: true,
