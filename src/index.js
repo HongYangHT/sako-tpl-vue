@@ -13,6 +13,8 @@ import i18nManager from '@/utils/i18n'
 
 import 'normalize.css'
 
+import * as serviceWorker from './serviceWorker'
+
 // 将路由状态同步到store中
 sync(store, router)
 
@@ -28,3 +30,8 @@ new Vue({
   i18n: i18nManager.i18n,
   render: h => h(App)
 })
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister()
