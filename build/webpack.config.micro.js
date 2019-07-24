@@ -10,21 +10,22 @@ const BaseConfig = require('./webpack.config.base')
 const merge = require('webpack-merge')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const packageJson = require('../package.json')
 
 const smp = new SpeedMeasurePlugin()
 
 module.exports = smp.wrap(
   merge(BaseConfig, {
     entry: {
-      'single-spa': './src/micro',
-      'project.config': './src/project.config.js'
+      'single-spa': './src/micro'
     },
     output: {
       path: resolve(__dirname, '../dist/asset'),
       publicPath: '/asset/',
       libraryTarget: 'umd',
-      filename: 'js/[name].js',
-      chunkFilename: 'js/[name].js',
+      filename: `${packageJson.name}-js/[name].js`,
+      chunkFilename: `${packageJson.name}-js/[name].[chunkhash].js`,
       umdNamedDefine: true
     },
     optimization: {
@@ -158,7 +159,13 @@ module.exports = smp.wrap(
         threshold: 100 * 1024,
         minRatio: 0.8,
         cache: true
-      })
+      }),
+      new CopyPlugin([
+        {
+          from: 'src/project.json',
+          to: 'project.json'
+        }
+      ])
     ]
   })
 )

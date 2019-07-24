@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 微前端工程入口
  * @Date: 2019-07-19 11:35:35
- * @LastEditTime: 2019-07-19 13:54:26
+ * @LastEditTime: 2019-07-24 14:36:26
  */
 import singleSpaVue from 'single-spa-vue'
 
@@ -35,7 +35,7 @@ Vue.config.productionTip = false
 const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
-    el: "#app",
+    el: "#{{name}}",
     router,
     store,
     i18n: i18nManager.i18n,
@@ -54,11 +54,11 @@ export const unmount = [vueLifecycles.unmount]
 
 function createDomElement() {
   // Make sure there is a div for us to render into
-  let el = document.getElementById("app")
+  let el = document.getElementById("{{name}}");
 
   if (!el) {
     el = document.createElement("div")
-    el.id = "app"
+    el.id = "{{name}}";
     document.body.appendChild(el)
   }
   return el

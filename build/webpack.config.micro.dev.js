@@ -5,19 +5,20 @@ const { resolve } = require('path')
 const config = require('./config')
 const portfinder = require('portfinder')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const packageJson = require('../package.json')
 // const { SkeletonPlugin } = require('page-skeleton-webpack-plugin')
 
 const devWebpackConfig = merge(BaseConfig, {
   entry: {
-    'single-spa': './src/micro',
-    'project.config': './src/project.config.js'
+    'single-spa': './src/micro'
   },
   output: {
     path: resolve(__dirname, './dist'),
     // publicPath: '/asset/',
     libraryTarget: 'umd',
-    filename: 'js/[name].js',
-    chunkFilename: 'js/[name].js',
+    filename: `${packageJson.name}-js/[name].js`,
+    chunkFilename: `${packageJson.name}-js/[name].[chunkhash].js`,
     umdNamedDefine: true
   },
   devServer: {
@@ -60,7 +61,13 @@ const devWebpackConfig = merge(BaseConfig, {
         minifyCSS: true,
         minifyURLs: true
       }
-    })
+    }),
+    new CopyPlugin([
+      {
+        from: 'src/project.js',
+        to: 'project.js'
+      }
+    ])
     // new SkeletonPlugin({
     //   pathname: resolve(__dirname, './shell'), // 用来存储 shell 文件的地址
     //   staticDir: resolve(__dirname, './dist'), // 最好和 `output.path` 相同
