@@ -10,6 +10,8 @@ const BaseConfig = require('./webpack.config.base')
 const merge = require('webpack-merge')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const packageJson = require('../package.json')
 
 const smp = new SpeedMeasurePlugin()
 
@@ -154,6 +156,40 @@ module.exports = smp.wrap(
         threshold: 100 * 1024,
         minRatio: 0.8,
         cache: true
+      }),
+      new SWPrecacheWebpackPlugin({
+        cacheId: `${packageJson.name}`,
+        // By default, a cache-busting query parameter is appended to requests
+        // used to populate the caches, to ensure the responses are fresh.
+        // If a URL is already hashed by Webpack, then there is no concern
+        // about it being stale, and the cache-busting can be skipped.
+        dontCacheBustUrlsMatching: /\.\w{8}\./,
+        // dontCacheBustUrlsMatching: false,
+        filename: 'service-worker.js',
+        logger(message) {
+          if (message.indexOf('Total precache size is') === 0) {
+            // This message occurs for every build and is a bit too noisy.
+            return
+          }
+          console.log(message)
+        },
+        minify: false,
+        mergeStaticsConfig: true,
+        staticFileGlobs: [],
+        // For unknown URLs, fallback to the index page
+        navigateFallback: '/index.html',
+        // Ignores URLs starting from /__ (useful for Firebase):
+        // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
+        navigateFallbackWhitelist: [/^(?!\/__).*/],
+        // Don't precache sourcemaps (they're large) and build asset manifest:
+        staticFileGlobsIgnorePatterns: [/\.html/, /\.map$/, /asset-manifest\.json$/],
+        // Work around Windows path issue in SWPrecacheWebpackPlugin:
+        // https://github.com/facebookincubator/create-react-app/issues/2235
+        stripPrefix: '/asset'.replace(/\\/g, '/') + '/'
+      }),
+      new webpack.DefinePlugin({
+        'process.env.PUBLIC_URL': JSON.stringify('/asset'),
+        'process.env.NODE_ENV': JSON.stringify('production')
       })
     ]
   })
