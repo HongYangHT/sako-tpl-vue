@@ -8,3 +8,4 @@ output
 examples/*
 yarn.lock
 package-lock.json
+.stylelintcache
