@@ -80,6 +80,9 @@ module.exports = smp.wrap(
           }
         }
       },
+      runtimeChunk: {
+        name: 'manifest'
+      },
       minimizer: [
         new TerserJSPlugin({}),
         new OptimizeCSSAssetsPlugin({}), // 压缩css

@@ -5,7 +5,6 @@ const tsConfig = require('./utils/ts')
 const cssModuleConfig = require('./utils/cssModule')
 const assetConfig = require('./utils/asset')
 const esConfig = require('./utils/es6')
-const fontConfig = require('./utils/font')
 const lessConfig = require('./utils/less')
 
 module.exports = merge({
@@ -17,8 +16,7 @@ module.exports = merge({
       ...esConfig,
       ...lessConfig,
       ...cssModuleConfig,
-      ...assetConfig,
-      ...fontConfig
+      ...assetConfig
     ]
   },
   plugins: [

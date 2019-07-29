@@ -9,7 +9,8 @@ module.exports = [
         loader:
           process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
         options: {
-          hmr: process.env.NODE_ENV === 'development'
+          hmr: process.env.NODE_ENV === 'development',
+          publicPath: process.env.NODE_ENV === 'production' ? '/asset' : '/'
         }
       },
       {
@@ -40,7 +41,8 @@ module.exports = [
                 if (rule.parent && rule.parent.type === 'atrule' && rule.parent.name !== 'media')
                   return
                 rule.selectors = rule.selectors.map(
-                  s => `.${packageJson.name} ${s === 'body' ? '' : s}`
+                  s =>
+                    `${/^.ivu/.test(s) ? '' : '.' + packageJson.name + ' '}${s === 'body' ? '' : s}`
                 )
               })
             )

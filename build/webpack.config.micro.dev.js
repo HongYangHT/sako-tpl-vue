@@ -7,6 +7,7 @@ const portfinder = require('portfinder')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const packageJson = require('../package.json')
+const webpack = require('webpack')
 // const { SkeletonPlugin } = require('page-skeleton-webpack-plugin')
 
 const devWebpackConfig = merge(BaseConfig, {
@@ -67,7 +68,11 @@ const devWebpackConfig = merge(BaseConfig, {
         from: 'src/project.js',
         to: 'project.js'
       }
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      'process.env.PUBLIC_URL': JSON.stringify('/'),
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
     // new SkeletonPlugin({
     //   pathname: resolve(__dirname, './shell'), // 用来存储 shell 文件的地址
     //   staticDir: resolve(__dirname, './dist'), // 最好和 `output.path` 相同

@@ -55,7 +55,7 @@ module.exports = merge(
       ]
     },
     resolve: {
-      modules: ['node_modules'],
+      modules: [resolve('node_modules'), resolve('src')],
       extensions: ['.js', '.vue', '.jsx', '.json', '.css', '.scss', '.sass'],
       alias: {
         '@': resolve(__dirname, '../src'),
