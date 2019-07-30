@@ -84,9 +84,9 @@ module.exports = smp.wrap(
           }
         }
       },
-      runtimeChunk: {
-        name: 'manifest'
-      },
+      // runtimeChunk: {
+      //   name: 'manifest'
+      // },
       minimizer: [
         new TerserJSPlugin({}),
         new OptimizeCSSAssetsPlugin({}), // 压缩css
@@ -166,8 +166,8 @@ module.exports = smp.wrap(
       }),
       new CopyPlugin([
         {
-          from: 'src/project.json',
-          to: 'project.json'
+          from: 'src/project.js',
+          to: 'project.js'
         }
       ]),
       new SWPrecacheWebpackPlugin({
