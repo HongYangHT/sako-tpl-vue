@@ -1,7 +1,14 @@
+/*
+ * @Author: sam.hongyang
+ * @LastEditors: sam.hongyang
+ * @Description:
+ * @Date: 2019-07-31 10:56:33
+ * @LastEditTime: 2019-08-13 10:08:45
+ */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const postcss = require('postcss')
-const { resolve } = require('path')
 const packageJson = require('../../package.json')
+
 module.exports = [
   {
     test: /\.(sc|sa|c)ss$/,
@@ -16,7 +23,12 @@ module.exports = [
                 : MiniCssExtractPlugin.loader,
             options: {
               hmr: process.env.NODE_ENV === 'development',
-              publicPath: resolve('/dist/asset/css')
+              publicPath:
+                process.env.NODE_ENV === 'production'
+                  ? process.env.microRoot
+                    ? process.env.microRoot
+                    : '/asset'
+                  : '/'
             }
           },
           {
@@ -34,7 +46,7 @@ module.exports = [
             options: {
               ident: 'postcss',
               sourceMap: true,
-              plugins: loader => [
+              plugins: () => [
                 // 可以配置多个插件
                 require('autoprefixer')({
                   overrideBrowserslist: [
@@ -55,7 +67,14 @@ module.exports = [
                     )
                       return
                     rule.selectors = rule.selectors.map(
-                      s => `.${packageJson.name} ${s === 'body' ? '' : s}`
+                      s =>
+                        `${
+                          /^.(ivu-dropdown|ivu-select|ivu-picker|ivu-color|ivu-alert|ivu-message|ivu-notice|ivu-poptip|ivu-loading|ivu-modal|vu-drawer|ivu-tooltip)|^(html|body|main|div|dl|dt|dd|ul|ol|li|h1|h2|h3|h4|h5|h6|form|fieldset|legend|input|textarea|p|blockquote|th|td|hr|button|article|aside|details|figcaption|figure|footer|header|hgroup|menu|nav|section)/.test(
+                            s
+                          )
+                            ? ''
+                            : '.' + packageJson.name + ' '
+                        }${s}`
                     )
                   })
                 )
@@ -79,7 +98,12 @@ module.exports = [
                 : MiniCssExtractPlugin.loader,
             options: {
               hmr: process.env.NODE_ENV === 'development',
-              publicPath: resolve('/dist/asset/css')
+              publicPath:
+                process.env.NODE_ENV === 'production'
+                  ? process.env.microRoot
+                    ? process.env.microRoot
+                    : '/asset'
+                  : '/'
             }
           },
           {
@@ -93,7 +117,7 @@ module.exports = [
             options: {
               ident: 'postcss',
               sourceMap: true,
-              plugins: loader => [
+              plugins: () => [
                 // 可以配置多个插件
                 // NOTE: new feature should change browsers to overrideBrowserslist
                 require('autoprefixer')({
@@ -115,7 +139,14 @@ module.exports = [
                     )
                       return
                     rule.selectors = rule.selectors.map(
-                      s => `.${packageJson.name} ${s === 'body' ? '' : s}`
+                      s =>
+                        `${
+                          /^.(ivu-dropdown|ivu-select|ivu-picker|ivu-color|ivu-alert|ivu-message|ivu-notice|ivu-poptip|ivu-loading|ivu-modal|vu-drawer|ivu-tooltip)|^(html|body|main|div|dl|dt|dd|ul|ol|li|h1|h2|h3|h4|h5|h6|form|fieldset|legend|input|textarea|p|blockquote|th|td|hr|button|article|aside|details|figcaption|figure|footer|header|hgroup|menu|nav|section)/.test(
+                            s
+                          )
+                            ? ''
+                            : '.' + packageJson.name + ' '
+                        }${s}`
                     )
                   })
                 )

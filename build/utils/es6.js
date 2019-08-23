@@ -6,6 +6,11 @@ module.exports = [
     test: /\.js$/,
     loader: 'babel-loader?cacheDirectory=true',
     exclude: file => /node_modules/.test(file) && !/\.vue\.js\.ts/.test(file),
-    include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+    include: [
+      resolve('src'),
+      resolve('test'),
+      resolve('node_modules/webpack-dev-server/client'),
+      resolve('/node_modules/iview/src')
+    ]
   }
 ]

@@ -10,7 +10,12 @@ module.exports = [
           // 具体配置见插件官网
           name: '[name]-[contenthash].[ext]',
           outputPath: 'img/',
-          publicPath: process.env.NODE_ENV === 'production' ? '/asset/img' : '/img'
+          publicPath:
+            process.env.NODE_ENV === 'production'
+              ? process.env.microRoot
+                ? process.env.microRoot + '/img'
+                : '/asset/img'
+              : '/img'
         }
       },
       {
@@ -50,7 +55,12 @@ module.exports = [
           // 具体配置见插件官网
           name: '[name]-[contenthash].[ext]',
           outputPath: 'fonts/',
-          publicPath: process.env.NODE_ENV === 'production' ? '/asset/fonts' : '/fonts'
+          publicPath:
+            process.env.NODE_ENV === 'production'
+              ? process.env.microRoot
+                ? process.env.microRoot + '/fonts'
+                : '/asset/fonts'
+              : '/fonts'
         }
       }
     ]

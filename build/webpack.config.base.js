@@ -5,6 +5,7 @@ const VueConfig = require('./webpack.config.vue')
 const merge = require('webpack-merge')
 const devMode = process.env.NODE_ENV !== 'production'
 const StyleLintPlugin = require('stylelint-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 // NOTE: 应用了splitChunks, 不再需要设置vender
 
@@ -93,6 +94,12 @@ module.exports = merge(
           minifyURLs: true
         }
       }),
+      new CopyPlugin([
+        {
+          from: 'static/**/*',
+          to: './'
+        }
+      ]),
       new StyleLintPlugin({
         files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}']
       })
