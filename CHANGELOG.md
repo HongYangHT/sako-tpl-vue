@@ -1,3 +1,7 @@
+# [1.2.0](https://github.com/HongYangHT/sako-tpl-vue/compare/v1.1.1-alpha.0...v1.2.0) (2019-10-08)
+
+
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
