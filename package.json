@@ -1,6 +1,6 @@
 {
   "name": "sako-tpl-vue",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "webpack config for vuejs",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "precommit": "lint-staged",
     "predeploy": "npm version patch",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "release": "release.sh",
     "prePushGit": "npm run eslint && npm run stylelint",
     "prePushConCurrently": "concurrently \"npm:eslint\" \"npm:stylelint\" \"npm:predeploy\"",
     "micro:dev": "cross-env NODE_ENV=development webpack-dev-server --hot --color --progress --config build/webpack.config.micro.dev.js",
